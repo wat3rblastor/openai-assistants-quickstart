@@ -17,14 +17,19 @@ const Home = () => {
         Explore sample apps built with Assistants API
       </div>
       <div className={styles.container}>
-        {Object.entries(categories).map(([name, url]) => (
-          <a key={name} className={styles.category} href={`/examples/${url}`}>
-            {name}
-          </a>
-        ))}
+        <a key="Basic chat" className={styles.category} href={`/examples/basic-chat`}>
+          Basic chat
+        </a>
       </div>
     </main>
   );
 };
 
 export default Home;
+
+
+// {Object.entries(categories).map(([name, url]) => (
+//   <a key={name} className={styles.category} href={`/examples/${url}`}>
+//     {name}
+//   </a>
+// ))}

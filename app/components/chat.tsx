@@ -8,6 +8,8 @@ import Markdown from "react-markdown";
 import { AssistantStreamEvent } from "openai/resources/beta/assistants/assistants";
 import { RequiredActionFunctionToolCall } from "openai/resources/beta/threads/runs/runs";
 
+
+
 type MessageProps = {
   role: "user" | "assistant" | "code";
   text: string;
@@ -57,6 +59,8 @@ type ChatProps = {
   ) => Promise<string>;
 };
 
+
+
 const Chat = ({
   functionCallHandler = () => Promise.resolve(""), // default to return empty string
 }: ChatProps) => {
@@ -82,6 +86,17 @@ const Chat = ({
       });
       const data = await res.json();
       setThreadId(data.threadId);
+
+      const res2 = await fetch(`/api/storeThreadId`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ threadId: data.threadId }),
+      });
+
+      console.log(res2)
+      console.log(data.threadId);
     };
     createThread();
   }, []);
